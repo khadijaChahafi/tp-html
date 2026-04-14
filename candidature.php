@@ -1,71 +1,62 @@
 <?php
-$prenom = '';
-$nom = '';
-$email = '';
-$age = '';
-$filiere = '';
-$motivation = '';
 $erreurs = [];
-?>
+
+
+$prenom = $nom = $email = $age = $filiere = $motivation = "";
+
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    $prenom = $_POST['prenom'] ?? '';
-    $nom = $_POST['nom'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $age = $_POST['age'] ?? '';
-    $filiere = $_POST['filiere'] ?? '';
-    $motivation = $_POST['motivation'] ?? '';
-
-    if (empty($prenom)) $erreurs[] = "Prénom obligatoire";
-    if (empty($nom)) $erreurs[] = "Nom obligatoire";
-    if (empty($email)) $erreurs[] = "Email obligatoire";
-    if ($age < 18) $erreurs[] = "Âge minimum 18";
-    if (empty($filiere)) $erreurs[] = "Choisir filière";
-    if (empty($motivation)) $erreurs[] = "Motivation obligatoire";
-    if (empty($_POST['reglement'])) $erreurs[] = "Accepter règlement";
+    $prenom = $_POST["prenom"] ?? "";
+    $nom = $_POST["nom"] ?? "";
+    $email = $_POST["email"] ?? "";
+    $age = $_POST["age"] ?? "";
+    $filiere = $_POST["filiere"] ?? "";
+    $motivation = $_POST["motivation"] ?? "";
 }
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Candidature</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Formulaire candidature</title>
 </head>
+
 <body>
-<?php if (!empty($erreurs)): ?>
-<ul>
-    <?php foreach ($erreurs as $e): ?>
-        <li><?= $e ?></li>
-    <?php endforeach; ?>
-</ul>
-<?php endif; ?>
-<form action="candidature.php" method="post">
 
-    <label>Prénom</label>
-    <input type="text" name="prenom">
+<form method="POST">
 
-    <label>Nom</label>
-    <input type="text" name="nom">
+    <!-- Prénom -->
+    <input type="text" name="prenom" value="<?= $prenom ?>">
 
-    <label>Email</label>
-    <input type="email" name="email">
+    <!-- Nom -->
+    <input type="text" name="nom" value="<?= $nom ?>">
 
-    <label>Âge</label>
-    <input type="number" name="age">
+    <!-- Email -->
+    <input type="email" name="email" value="<?= $email ?>">
 
-    <label>Filière</label>
+    <!-- Age -->
+    <input type="number" name="age" value="<?= $age ?>">
+
+    <!-- Filière -->
     <select name="filiere">
         <option value="">-- Choisir --</option>
-        <option value="Informatique">Informatique</option>
-        <option value="Électronique">Électronique</option>
-        <option value="Mécanique">Mécanique</option>
+
+        <option value="Informatique" <?= $filiere=="Informatique" ? "selected" : "" ?>>
+            Informatique
+        </option>
+
+        <option value="Gestion" <?= $filiere=="Gestion" ? "selected" : "" ?>>
+            Gestion
+        </option>
+
+        <option value="Réseaux" <?= $filiere=="Réseaux" ? "selected" : "" ?>>
+            Réseaux
+        </option>
     </select>
 
-    <label>Motivation</label>
-    <textarea name="motivation"></textarea>
-
-    <label>
-        <input type="checkbox" name="reglement"> Accepter
-    </label>
+    <!-- Motivation -->
+    <textarea name="motivation"><?= $motivation ?></textarea>
 
     <button type="submit">Envoyer</button>
 
