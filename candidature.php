@@ -5,15 +5,15 @@ $prenom = $nom = $email = $age = $filiere = $motivation = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    
-    $prenom = trim($_POST["prenom"] ?? '');
-    $nom = trim($_POST["nom"] ?? '');
-    $email = trim($_POST["email"] ?? '');
-    $age = trim($_POST["age"] ?? '');
-    $filiere = trim($_POST["filiere"] ?? '');
-    $motivation = trim($_POST["motivation"] ?? '');
- 
-   
+    // Récupération des données
+    $prenom = trim($_POST["prenom"]);
+    $nom = trim($_POST["nom"]);
+    $email = trim($_POST["email"]);
+    $age = trim($_POST["age"]);
+    $filiere = trim($_POST["filiere"]);
+    $motivation = trim($_POST["motivation"]);
+
+    // Validation
     if (empty($prenom)) $erreurs[] = "Prénom obligatoire";
     if (empty($nom)) $erreurs[] = "Nom obligatoire";
 
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($filiere)) $erreurs[] = "Filière obligatoire";
     if (empty($motivation)) $erreurs[] = "Motivation obligatoire";
 
-    
+    // Si pas d’erreurs
     if (empty($erreurs)) {
         echo "<h3 style='color:green;'>Formulaire envoyé avec succès ✅</h3>";
     }
