@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <?php if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($erreurs)): ?>
 
-    <!-- ✅ MESSAGE DE CONFIRMATION -->
     <h2>Candidature envoyée avec succès ✅</h2>
 
     <p><strong>Prénom :</strong> <?= $prenom ?></p>
@@ -38,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <?php else: ?>
 
-    <!-- 🟢 FORMULAIRE -->
     <form method="POST">
 
         <input type="text" name="prenom" value="<?= $prenom ?>" placeholder="Prénom">
