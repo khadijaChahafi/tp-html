@@ -1,87 +1,85 @@
-<?php
-$erreurs = [];
-
-$prenom = $nom = $email = $age = $filiere = $motivation = "";
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    // Récupération des données
-    $prenom = trim($_POST["prenom"]);
-    $nom = trim($_POST["nom"]);
-    $email = trim($_POST["email"]);
-    $age = trim($_POST["age"]);
-    $filiere = trim($_POST["filiere"]);
-    $motivation = trim($_POST["motivation"]);
-
-    // Validation
-    if (empty($prenom)) $erreurs[] = "Prénom obligatoire";
-    if (empty($nom)) $erreurs[] = "Nom obligatoire";
-
-    if (empty($email)) {
-        $erreurs[] = "Email obligatoire";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erreurs[] = "Email invalide";
-    }
-
-    if (empty($age)) {
-        $erreurs[] = "Âge obligatoire";
-    } elseif (!is_numeric($age) || $age <= 0) {
-        $erreurs[] = "Âge invalide";
-    }
-
-    if (empty($filiere)) $erreurs[] = "Filière obligatoire";
-    if (empty($motivation)) $erreurs[] = "Motivation obligatoire";
-
-    // Si pas d’erreurs
-    if (empty($erreurs)) {
-        echo "<h3 style='color:green;'>Formulaire envoyé avec succès ✅</h3>";
-    }
-}
+<?php 
+$prenom    = '';
+$nom       = '';
+$email     = '';
+$age       = '';
+$filiere   = '';
+$motivation = '';
+$erreurs   = [];
+$reglement = '';
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>TP Formulaire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
 <body>
+     <div class="container">
+            <form action="candidature.php" method="POST">
 
-<h2>Formulaire d'inscription</h2>
+                <label for="prenom">Prénom:</label>
+                <input type="text" id="prenom" name="prenom"  >
+                
+                <label for="nom">Nom:</label>
+                <input type="text" name="nom" id="nom"  >
 
-<?php
-if (!empty($erreurs)) {
-    echo "<ul style='color:red;'>";
-    foreach ($erreurs as $e) {
-        echo "<li>$e</li>";
-    }
-    echo "</ul>";
-}
-?>
+                <label for="age">Age:</label>
+                <input type="number" name="age" id="age" >
 
-<form method="POST">
+                <label for="filiere">Filière:</label>
 
-    Prénom : <br>
-    <input type="text" name="prenom" value="<?= htmlspecialchars($prenom) ?>"><br><br>
+                <select name="filiere" id="filiere">
 
-    Nom : <br>
-    <input type="text" name="nom" value="<?= htmlspecialchars($nom) ?>"><br><br>
+                    <option value="">--Choisir--</option>
 
-    Email : <br>
-    <input type="email" name="email" value="<?= htmlspecialchars($email) ?>"><br><br>
+                    <option value='Informatique'
+                    >
+                        Informatique
+                        
+                    </option>
 
-    Âge : <br>
-    <input type="number" name="age" value="<?= htmlspecialchars($age) ?>"><br><br>
+                    <option value="Electronique"
+                    >
+                        Electronique
 
-    Filière : <br>
-    <input type="text" name="filiere" value="<?= htmlspecialchars($filiere) ?>"><br><br>
+                    </option>
 
-    Motivation : <br>
-    <textarea name="motivation"><?= htmlspecialchars($motivation) ?></textarea><br><br>
+                    <option value="Mecanique"
+                    >
+                        Mecanique
 
-    <button type="submit">Envoyer</button>
+                    </option>
 
-</form>
+                    <option value="Mathématiques"
+                    >
+                        Mathématiques
 
+                    </option>
+
+
+                </select>
+
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email"  >
+
+
+                <label for="mtv">Motivation:</label>
+            
+                <textarea name="motivation" id="mtv" rows="6"  ></textarea>
+
+                <label for="reglement">J'ai lu et j'accepte le règlement du club</label>
+                <input type="checkbox" name="reglement"  value="1">
+
+                <button type="submit"> Envoyer ma candidature</button>
+
+
+        
+            </form>
+        </div>
+    
 </body>
 </html>
