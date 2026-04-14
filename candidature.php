@@ -24,43 +24,51 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body>
 
-<form method="POST">
+<?php if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($erreurs)): ?>
 
-    <!-- Prénom -->
-    <input type="text" name="prenom" value="<?= $prenom ?>">
+    <!-- ✅ MESSAGE DE CONFIRMATION -->
+    <h2>Candidature envoyée avec succès ✅</h2>
 
-    <!-- Nom -->
-    <input type="text" name="nom" value="<?= $nom ?>">
+    <p><strong>Prénom :</strong> <?= $prenom ?></p>
+    <p><strong>Nom :</strong> <?= $nom ?></p>
+    <p><strong>Email :</strong> <?= $email ?></p>
+    <p><strong>Âge :</strong> <?= $age ?></p>
+    <p><strong>Filière :</strong> <?= $filiere ?></p>
+    <p><strong>Motivation :</strong> <?= $motivation ?></p>
 
-    <!-- Email -->
-    <input type="email" name="email" value="<?= $email ?>">
+<?php else: ?>
 
-    <!-- Age -->
-    <input type="number" name="age" value="<?= $age ?>">
+    <!-- 🟢 FORMULAIRE -->
+    <form method="POST">
 
-    <!-- Filière -->
-    <select name="filiere">
-        <option value="">-- Choisir --</option>
+        <input type="text" name="prenom" value="<?= $prenom ?>" placeholder="Prénom">
+        <input type="text" name="nom" value="<?= $nom ?>" placeholder="Nom">
+        <input type="email" name="email" value="<?= $email ?>" placeholder="Email">
+        <input type="number" name="age" value="<?= $age ?>" placeholder="Âge">
 
-        <option value="Informatique" <?= $filiere=="Informatique" ? "selected" : "" ?>>
-            Informatique
-        </option>
+        <select name="filiere">
+            <option value="">-- Choisir --</option>
 
-        <option value="Gestion" <?= $filiere=="Gestion" ? "selected" : "" ?>>
-            Gestion
-        </option>
+            <option value="Informatique" <?= $filiere=="Informatique" ? "selected" : "" ?>>
+                Informatique
+            </option>
 
-        <option value="Réseaux" <?= $filiere=="Réseaux" ? "selected" : "" ?>>
-            Réseaux
-        </option>
-    </select>
+            <option value="Gestion" <?= $filiere=="Gestion" ? "selected" : "" ?>>
+                Gestion
+            </option>
 
-    <!-- Motivation -->
-    <textarea name="motivation"><?= $motivation ?></textarea>
+            <option value="Réseaux" <?= $filiere=="Réseaux" ? "selected" : "" ?>>
+                Réseaux
+            </option>
+        </select>
 
-    <button type="submit">Envoyer</button>
+        <textarea name="motivation"><?= $motivation ?></textarea>
 
-</form>
+        <button type="submit">Envoyer</button>
+
+    </form>
+
+<?php endif; ?>
 
 </body>
 </html>
