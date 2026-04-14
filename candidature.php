@@ -1,95 +1,53 @@
-<?php 
-$prenom    = '';
-$nom       = '';
-$email     = '';
-$age       = '';
-$filiere   = '';
+<?php
+$prenom = '';
+$nom = '';
+$email = '';
+$age = '';
+$filiere = '';
 $motivation = '';
-$erreurs   = [];
-$reglement = '';
-
-if ($_SERVER["REQUEST_METHOD"]==="POST"):
-    $prenom    = $_POST["prenom"]??"";
-    $nom       = $_POST["nom"]??"";
-    $email     = $_POST["email"]??"";
-    $age       = $_POST["age"]??"";
-    $filiere   = $_POST["filiere"]??"";
-    $motivation = $_POST["motivation"]??"";
-    $reglement = isset($_POST['reglement']);
-endif;
+$erreurs = [];
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidature</title>
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
 </head>
 <body>
-     <div class="container">
-            <form action="candidature.php" method="POST">
 
-                <label for="prenom">Prénom:</label>
-                <input type="text" id="prenom" name="prenom"  >
-                
-                <label for="nom">Nom:</label>
-                <input type="text" name="nom" id="nom"  >
+<form action="candidature.php" method="post">
 
-                <label for="age">Age:</label>
-                <input type="number" name="age" id="age" >
+    <label>Prénom</label>
+    <input type="text" name="prenom">
 
-                <label for="filiere">Filière:</label>
+    <label>Nom</label>
+    <input type="text" name="nom">
 
-                <select name="filiere" id="filiere">
+    <label>Email</label>
+    <input type="email" name="email">
 
-                    <option value="">--Choisir--</option>
+    <label>Âge</label>
+    <input type="number" name="age">
 
-                    <option value='Informatique'
-                    >
-                        Informatique
-                        
-                    </option>
+    <label>Filière</label>
+    <select name="filiere">
+        <option value="">-- Choisir --</option>
+        <option value="Informatique">Informatique</option>
+        <option value="Électronique">Électronique</option>
+        <option value="Mécanique">Mécanique</option>
+    </select>
 
-                    <option value="Electronique"
-                    >
-                        Electronique
+    <label>Motivation</label>
+    <textarea name="motivation"></textarea>
 
-                    </option>
+    <label>
+        <input type="checkbox" name="reglement"> Accepter
+    </label>
 
-                    <option value="Mecanique"
-                    >
-                        Mecanique
+    <button type="submit">Envoyer</button>
 
-                    </option>
+</form>
 
-                    <option value="Mathématiques"
-                    >
-                        Mathématiques
-
-                    </option>
-
-
-                </select>
-
-                <label for="email">Email:</label>
-                <input type="text" name="email" id="email"  >
-
-
-                <label for="mtv">Motivation:</label>
-            
-                <textarea name="motivation" id="mtv" rows="6"  ></textarea>
-
-                <label for="reglement">J'ai lu et j'accepte le règlement du club</label>
-                <input type="checkbox" name="reglement"  value="1">
-
-                <button type="submit"> Envoyer ma candidature</button>
-
-
-        
-            </form>
-        </div>
-    
 </body>
 </html>
